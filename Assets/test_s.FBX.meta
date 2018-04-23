@@ -1,0 +1,265 @@
+fileFormatVersion: 2
+guid: 62f3760ec864f444e93314232b91e295
+timeCreated: 1510232356
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: ArmBox1
+    100002: ArmBox2
+    100004: Backdrop
+    100006: C-arm
+    100008: C-ArmAperture
+    100010: C-armAxle
+    100012: C-armCradle
+    100014: C-ArmGussett
+    100016: C-ArmIntensCover
+    100018: C-ArmOuterStrip
+    100020: C-armPowerCover
+    100022: Ceiling
+    100024: CeilingBox
+    100026: Circle001
+    100028: Circle002
+    100030: CouchBase
+    100032: CouchBellows
+    100034: CouchEnclosure
+    100036: CouchMid
+    100038: CouchMidCapsule
+    100040: CouchShin
+    100042: CouchTop
+    100044: Floor
+    100046: Guide_Axle1
+    100048: Guide_Axle2
+    100050: Guide_Axle2 1
+    100052: HorizArm
+    100054: IntensArm
+    100056: IntensBack
+    100058: Intensifier
+    100060: IntensPerim
+    100062: Isocentre
+    100064: Line001
+    100066: Line004
+    100068: Line005
+    100070: PowerStrip
+    100072: RailLeft
+    100074: RailRight
+    100076: //RootNode
+    100078: VertArm
+    100080: VertArmRing
+    100082: x-axis
+    100084: y-axis
+    400000: ArmBox1
+    400002: ArmBox2
+    400004: Backdrop
+    400006: C-arm
+    400008: C-ArmAperture
+    400010: C-armAxle
+    400012: C-armCradle
+    400014: C-ArmGussett
+    400016: C-ArmIntensCover
+    400018: C-ArmOuterStrip
+    400020: C-armPowerCover
+    400022: Ceiling
+    400024: CeilingBox
+    400026: Circle001
+    400028: Circle002
+    400030: CouchBase
+    400032: CouchBellows
+    400034: CouchEnclosure
+    400036: CouchMid
+    400038: CouchMidCapsule
+    400040: CouchShin
+    400042: CouchTop
+    400044: Floor
+    400046: Guide_Axle1
+    400048: Guide_Axle2
+    400050: Guide_Axle2 1
+    400052: HorizArm
+    400054: IntensArm
+    400056: IntensBack
+    400058: Intensifier
+    400060: IntensPerim
+    400062: Isocentre
+    400064: Line001
+    400066: Line004
+    400068: Line005
+    400070: PowerStrip
+    400072: RailLeft
+    400074: RailRight
+    400076: //RootNode
+    400078: VertArm
+    400080: VertArmRing
+    400082: x-axis
+    400084: y-axis
+    2300000: ArmBox1
+    2300002: ArmBox2
+    2300004: Backdrop
+    2300006: C-arm
+    2300008: C-ArmAperture
+    2300010: C-armAxle
+    2300012: C-armCradle
+    2300014: C-ArmGussett
+    2300016: C-ArmIntensCover
+    2300018: C-ArmOuterStrip
+    2300020: C-armPowerCover
+    2300022: Ceiling
+    2300024: CeilingBox
+    2300026: CouchBase
+    2300028: CouchBellows
+    2300030: CouchEnclosure
+    2300032: CouchMid
+    2300034: CouchMidCapsule
+    2300036: CouchShin
+    2300038: CouchTop
+    2300040: Floor
+    2300042: Guide_Axle2
+    2300044: HorizArm
+    2300046: IntensArm
+    2300048: IntensBack
+    2300050: Intensifier
+    2300052: IntensPerim
+    2300054: Isocentre
+    2300056: PowerStrip
+    2300058: RailLeft
+    2300060: RailRight
+    2300062: VertArm
+    2300064: VertArmRing
+    2300066: Guide_Axle2 1
+    3300000: ArmBox1
+    3300002: ArmBox2
+    3300004: Backdrop
+    3300006: C-arm
+    3300008: C-ArmAperture
+    3300010: C-armAxle
+    3300012: C-armCradle
+    3300014: C-ArmGussett
+    3300016: C-ArmIntensCover
+    3300018: C-ArmOuterStrip
+    3300020: C-armPowerCover
+    3300022: Ceiling
+    3300024: CeilingBox
+    3300026: CouchBase
+    3300028: CouchBellows
+    3300030: CouchEnclosure
+    3300032: CouchMid
+    3300034: CouchMidCapsule
+    3300036: CouchShin
+    3300038: CouchTop
+    3300040: Floor
+    3300042: Guide_Axle2
+    3300044: HorizArm
+    3300046: IntensArm
+    3300048: IntensBack
+    3300050: Intensifier
+    3300052: IntensPerim
+    3300054: Isocentre
+    3300056: PowerStrip
+    3300058: RailLeft
+    3300060: RailRight
+    3300062: VertArm
+    3300064: VertArmRing
+    3300066: Guide_Axle2 1
+    4300000: Backdrop
+    4300002: Guide_Axle2
+    4300004: CeilingBox
+    4300006: Floor
+    4300008: Ceiling
+    4300010: HorizArm
+    4300012: VertArm
+    4300014: VertArmRing
+    4300016: CouchEnclosure
+    4300018: CouchBellows
+    4300020: CouchMidCapsule
+    4300022: CouchBase
+    4300024: CouchShin
+    4300026: CouchTop
+    4300028: CouchMid
+    4300030: RailLeft
+    4300032: RailRight
+    4300034: Isocentre
+    4300036: ArmBox1
+    4300038: ArmBox2
+    4300040: C-armAxle
+    4300042: C-armCradle
+    4300044: C-armPowerCover
+    4300046: C-arm
+    4300048: C-ArmGussett
+    4300050: PowerStrip
+    4300052: C-ArmOuterStrip
+    4300054: C-ArmIntensCover
+    4300056: C-ArmAperture
+    4300058: IntensArm
+    4300060: IntensBack
+    4300062: Intensifier
+    4300064: IntensPerim
+    9500000: //RootNode
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 0
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
