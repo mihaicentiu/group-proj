@@ -35,6 +35,11 @@ public class ArdTransCouchTop : MonoBehaviour {
 
 	private bool toggle;
 
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
+
     // Use this for initialization
     void Start()
     {
@@ -43,6 +48,9 @@ public class ArdTransCouchTop : MonoBehaviour {
         vcouchmovmult = 0.05f;
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
 	void ConfigurePins()

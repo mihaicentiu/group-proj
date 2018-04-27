@@ -16,6 +16,10 @@ public class ArdTransIntens : MonoBehaviour {
 
 
 	public float mappedJoy;
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
 
     // Use this for initialization
     void Start()
@@ -23,6 +27,9 @@ public class ArdTransIntens : MonoBehaviour {
         intensmovmult = 0.1f;
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
 	void ConfigurePins()
@@ -48,12 +55,20 @@ public class ArdTransIntens : MonoBehaviour {
         if (transform.localPosition.y >= 1.17f)
         {
             intensmovrate = -0.01f;
-        }
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
 
         if (transform.localPosition.y <= 0.65f)
         {
             intensmovrate = +0.01f;
-        }
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
 
         transform.Translate(0.0f, intensmovrate * Time.deltaTime, 0.0f);
     }

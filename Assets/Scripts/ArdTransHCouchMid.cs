@@ -27,12 +27,20 @@ public class ArdTransHCouchMid : MonoBehaviour {
     private float hcouchmidmovrate;
     private float hcouchmidmovmult;
 
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
+
     // Use this for initialization
     void Start()
     {
         hcouchmidmovmult = 0.05f;
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
 	void ConfigurePins()
@@ -55,6 +63,11 @@ public class ArdTransHCouchMid : MonoBehaviour {
 
 			hcouchmidmovrate = -mappedJoy * hcouchmidmovmult;
 			transform.Translate (hcouchmidmovrate * Time.deltaTime, 0.0f, 0.0f);
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
 		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
+
 	}
 }

@@ -25,6 +25,10 @@ public class ArdRotnCeilArm : MonoBehaviour {
 
 	public float speed;
 
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
 
     // Use this for initialization
     void Start()
@@ -32,6 +36,9 @@ public class ArdRotnCeilArm : MonoBehaviour {
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
         rotmult = 1.0f;
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
 	void ConfigurePins()
@@ -53,18 +60,26 @@ public class ArdRotnCeilArm : MonoBehaviour {
 			rotationY += speed;
 			rotationY = Mathf.Clamp (rotationY,leftRotateEdge, rightRotateEdge);
 			transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x,rotationY, transform.localEulerAngles.z);
-				
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}	
 			//rotrate = -rotmult;
 				//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
-			}
+
 		if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
 			rotationY += -speed;
 			rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
 			transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x,rotationY, transform.localEulerAngles.z);
-
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
 			//rotrate = -rotmult;
 			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
-			}
+
 			//Debug.Log(arduino.digitalRead (rotateLeftPinNumber));
 
 			//if (arduino.digitalRead (rotateLeftPinNumber) == 1) {

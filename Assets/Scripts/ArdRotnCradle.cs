@@ -20,12 +20,20 @@ public class ArdRotnCradle : MonoBehaviour {
 	public float mappedJoy;
 	public float speed;
 
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
+
     // Use this for initialization
     void Start()
     {
         rotmult = 1.0f;
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
 	void ConfigurePins()
@@ -45,7 +53,10 @@ public class ArdRotnCradle : MonoBehaviour {
 			rotationZ += mappedJoy * speed;
 			rotationZ = Mathf.Clamp (rotationZ, leftRot, rightRot);
 			transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, transform.localEulerAngles.y, -rotationZ);
-
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 		}
 		//if ((transform.rotation.z < rightRot) && (transform.rotation.z > leftRot)) {
 			//rotrate = mappedJoy * rotmult;

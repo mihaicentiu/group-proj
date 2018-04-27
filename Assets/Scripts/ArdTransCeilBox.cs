@@ -18,12 +18,20 @@ public class ArdTransCeilBox : MonoBehaviour {
 	public float leftEdge;
 	public float rightEdge;
 
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
+
     // Use this for initialization
     void Start()
     {
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
         movmult = 0.5f;
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
 	void ConfigurePins()
@@ -46,14 +54,22 @@ public class ArdTransCeilBox : MonoBehaviour {
 		if ((arduino.digitalRead (buttonPinNumber) == 1) && (transform.localPosition.z <= rightEdge)) {
 			movrate = movmult;
 			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
-		
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 		}
 			
 
 		if ((arduino.digitalRead (buttonPinNumber2) == 1)&& (transform.localPosition.z >= leftEdge)) {
 				movrate = -movmult;
 			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
-			}
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+		else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
+
 
 	
 

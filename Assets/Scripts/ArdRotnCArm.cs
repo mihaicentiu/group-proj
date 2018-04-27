@@ -22,6 +22,11 @@ public class ArdRotnCArm : MonoBehaviour {
 
 	public float speed; 
 
+	private Material Highlight;
+	private Material DefaultColour;
+
+	public GameObject ButtonToHighlight;
+
 
     // Use this for initialization
     void Start()
@@ -29,6 +34,9 @@ public class ArdRotnCArm : MonoBehaviour {
         rotmult = 0.8f;
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
+		//For highlighting
+		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
     }
 
     // Update is called once per frame
@@ -50,9 +58,13 @@ public class ArdRotnCArm : MonoBehaviour {
 			rotationX += mappedJoy * speed;
 			rotationX = Mathf.Clamp (rotationX, bottomRot, topRot);
 			transform.localEulerAngles = new Vector3 (rotationX, transform.localEulerAngles.y, transform.localEulerAngles.z);
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		}
+			else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 
 		//rotrate = mappedJoy*rotmult;
         //transform.Rotate(rotrate * Time.deltaTime,0.0f,0.0f);
     }
-}
 }
