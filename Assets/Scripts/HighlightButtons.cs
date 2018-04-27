@@ -10,19 +10,19 @@ public class HighlightButtons : MonoBehaviour {
 	public GameObject IntensifierUpDownButton;
 
 	//Right Stick
-	public GameObject CArmClockButton;  //left 
-	public GameObject CArmAntiClockButton; //right
+	public GameObject CArmRotation;  //left 
+	//public GameObject CArmAntiClockButton; //right
 
 	//Dpad
-	public GameObject TableUpButton;
-	public GameObject TableDownButton;
-	public GameObject TableForwardButton;
-	public GameObject TableBackButton;
+	public GameObject Table;
+	//public GameObject TableDownButton;
+	//public GameObject TableForwardButton;
+	//public GameObject TableBackButton;
 
 	//TriggerL
-	public GameObject CeilingBoxBack;
+	public GameObject CeilingBoxForwardBack;
 	//TriggerR
-	public GameObject CeilingBoxForward;
+	//public GameObject CeilingBoxForward;
 
 	public Material Highlight;
 	public Material Default01;
