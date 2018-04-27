@@ -18,8 +18,8 @@ public class ArdTransCeilBox : MonoBehaviour {
 	public float leftEdge;
 	public float rightEdge;
 
-	private Material Highlight;
-	private Material DefaultColour;
+	public Material Highlight;
+	public Material DefaultColour;
 
 	public GameObject ButtonToHighlight;
 

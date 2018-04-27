@@ -25,8 +25,8 @@ public class ArdRotnCeilArm : MonoBehaviour {
 
 	public float speed;
 
-	private Material Highlight;
-	private Material DefaultColour;
+	public Material Highlight;
+	public Material DefaultColour;
 
 	public GameObject ButtonToHighlight;
 
@@ -45,7 +45,7 @@ public class ArdRotnCeilArm : MonoBehaviour {
 	{
 		arduino.pinMode(rotateLeftPinNumber, PinMode.INPUT);
 		arduino.pinMode (rotateRightPinNumber, PinMode.INPUT);
-		arduino.reportDigital((byte)(rotateLeftPinNumber / 13), 1);
+		arduino.reportDigital((byte)(rotateLeftPinNumber / 9), 1);
 		arduino.reportDigital((byte)(rotateRightPinNumber / 12), 1);
 
 	}
