@@ -41,6 +41,8 @@ public class ArdTransCouchTop : MonoBehaviour {
 	public GameObject ButtonToHighlight;
 	public GameObject ButtonToggleHighlight;
 
+	private GameObject ArduinoScript;
+
     // Use this for initialization
     void Start()
     {
@@ -52,6 +54,8 @@ public class ArdTransCouchTop : MonoBehaviour {
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
 		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		//grab arduino object
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
 	void ConfigurePins()
@@ -70,58 +74,59 @@ public class ArdTransCouchTop : MonoBehaviour {
     // Update is called once per frame
     void Update()
 	{
-		joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
-		mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
+		//Check if arduino connected
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
+			
+			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
+			mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
 
-		joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
-		mappedJoy2 = joyValue2.Remap (1023, 0, -1, 1);
+			joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
+			mappedJoy2 = joyValue2.Remap (1023, 0, -1, 1);
 
 
-		vcouchmovrate = mappedJoy * vcouchmovmult;
+			vcouchmovrate = mappedJoy * vcouchmovmult;
 
-		Debug.Log (arduino.digitalRead (rotateButtonNumber));
+			Debug.Log (arduino.digitalRead (rotateButtonNumber));
 
-		float RotX = transform.rotation.x;
+			float RotX = transform.rotation.x;
 
-		//Toggle button
-		if ((toggle == false) && (arduino.digitalRead (rotateButtonNumber) == 1)) {
+			//Toggle button
+			if ((toggle == false) && (arduino.digitalRead (rotateButtonNumber) == 1)) {
 				unlockTilt = !unlockTilt;
-			toggle = true;
+				toggle = true;
 
-			//toggle button highlight
-			ButtonToggleHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-		else {
-			ButtonToggleHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}
+				//toggle button highlight
+				ButtonToggleHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToggleHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 
-		if (arduino.digitalRead (rotateButtonNumber) == 0){
-			toggle = false;
-		}
+			if (arduino.digitalRead (rotateButtonNumber) == 0) {
+				toggle = false;
+			}
 
-		if ((RotX < topEdge) || (RotX > bottomEdge)) {
-			if (unlockTilt == false) {
+			if ((RotX < topEdge) || (RotX > bottomEdge)) {
+				if (unlockTilt == false) {
 
-				if ((joyValue <= 477) || (joyValue >= 569)) {
-					if (transform.localPosition.y >= 0.74f) {
-						vcouchmovrate = -0.5f;
+					if ((joyValue <= 477) || (joyValue >= 569)) {
+						if (transform.localPosition.y >= 0.74f) {
+							vcouchmovrate = -0.5f;
 
+						}
+
+						if (transform.localPosition.y <= 0.37f) {
+							vcouchmovrate = 0.5f;
+						}
+						transform.Translate (0.0f, vcouchmovrate * Time.deltaTime, 0.0f);
+						//highlight button
+						ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+					} else {
+						ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 					}
-
-					if (transform.localPosition.y <= 0.37f) {
-						vcouchmovrate = 0.5f;
-					}
-					transform.Translate (0.0f, vcouchmovrate * Time.deltaTime, 0.0f);
-					//highlight button
-					ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-				}
-				else {
-					ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-				}
 				
 			
+				}
 			}
-		}
 
 
 
@@ -132,22 +137,20 @@ public class ArdTransCouchTop : MonoBehaviour {
 				
 				if (joyValue2 <= 250) {
 					transform.RotateAround (transform.position, Vector3.right, mappedJoy2 * spinSpeed);
-				//highlight button
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			}
-			else {
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}
+					//highlight button
+					ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+				} else {
+					ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+				}
 				if (joyValue2 >= 750) {
 					transform.RotateAround (transform.position, Vector3.right, mappedJoy2 * spinSpeed);
-				//highlight button
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			}
-			else {
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}
+					//highlight button
+					ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+				} else {
+					ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+				}
 				
 			}
 		}
-
+	}
 	}

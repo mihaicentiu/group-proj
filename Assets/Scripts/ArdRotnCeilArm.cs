@@ -23,12 +23,15 @@ public class ArdRotnCeilArm : MonoBehaviour {
     private float rotmult;
 	private float rotationY = 0f;
 
+
 	public float speed;
 
 	public Material Highlight;
 	public Material DefaultColour;
 
 	public GameObject ButtonToHighlight;
+
+	private GameObject ArduinoScript;
 
     // Use this for initialization
     void Start()
@@ -39,6 +42,8 @@ public class ArdRotnCeilArm : MonoBehaviour {
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
 		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		//grab arduino object
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
 	void ConfigurePins()
@@ -54,36 +59,36 @@ public class ArdRotnCeilArm : MonoBehaviour {
     void FixedUpdate()
 	{
 
-
+		//Check if arduino connected
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
 
 			if (arduino.digitalRead (rotateRightPinNumber) == 1) {
-			rotationY += speed;
-			rotationY = Mathf.Clamp (rotationY,leftRotateEdge, rightRotateEdge);
-			transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x,rotationY, transform.localEulerAngles.z);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-		else {
-			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}	
+				rotationY += speed;
+				rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
+				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}	
 			//rotrate = -rotmult;
-				//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
+			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
 
-		if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
-			rotationY += -speed;
-			rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
-			transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x,rotationY, transform.localEulerAngles.z);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-		else {
-			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}
+			if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
+				rotationY += -speed;
+				rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
+				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 			//rotrate = -rotmult;
 			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
 
 			//Debug.Log(arduino.digitalRead (rotateLeftPinNumber));
 
 			//if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
-				//rotrate = rotmult;
-				//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
+			//rotrate = rotmult;
+			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
 		}
+	}
 }

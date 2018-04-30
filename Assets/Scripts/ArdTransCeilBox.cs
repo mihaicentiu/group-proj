@@ -23,6 +23,8 @@ public class ArdTransCeilBox : MonoBehaviour {
 
 	public GameObject ButtonToHighlight;
 
+	private GameObject ArduinoScript;
+
     // Use this for initialization
     void Start()
     {
@@ -32,6 +34,8 @@ public class ArdTransCeilBox : MonoBehaviour {
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
 		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		//grab arduino object
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
 	void ConfigurePins()
@@ -45,32 +49,31 @@ public class ArdTransCeilBox : MonoBehaviour {
     // Update is called once per frame
     void FixedUpdate()
     {
+		//Check if arduino connected
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
 
+			if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0)) {
+				movrate = 0;
+			}
 
-		if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0))  {
-			movrate = 0;
-		}
-
-		if ((arduino.digitalRead (buttonPinNumber) == 1) && (transform.localPosition.z <= rightEdge)) {
-			movrate = movmult;
-			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-		else {
-			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}
+			if ((arduino.digitalRead (buttonPinNumber) == 1) && (transform.localPosition.z <= rightEdge)) {
+				movrate = movmult;
+				transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 			
 
-		if ((arduino.digitalRead (buttonPinNumber2) == 1)&& (transform.localPosition.z >= leftEdge)) {
+			if ((arduino.digitalRead (buttonPinNumber2) == 1) && (transform.localPosition.z >= leftEdge)) {
 				movrate = -movmult;
-			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-		else {
-			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}
+				transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 
-
+		}
 	
 
 
