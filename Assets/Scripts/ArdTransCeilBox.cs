@@ -39,7 +39,7 @@ public class ArdTransCeilBox : MonoBehaviour {
 		arduino.pinMode (buttonPinNumber, PinMode.INPUT);
 		arduino.reportDigital ((byte)(buttonPinNumber / 8), 1);
 		arduino.pinMode (buttonPinNumber2, PinMode.INPUT);
-		arduino.reportDigital ((byte)(buttonPinNumber2 / 11), 1);
+		arduino.reportDigital ((byte)(buttonPinNumber2 / 4), 1);
 	}
 
     // Update is called once per frame
