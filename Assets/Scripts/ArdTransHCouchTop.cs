@@ -52,7 +52,7 @@ public class ArdTransHCouchTop : MonoBehaviour {
 
 		//Tell the Arduino to report any changes in the value of our joysticks2
 		arduino.reportAnalog(13, 1);  //up down
-		arduino.reportAnalog(14, 1); 
+		arduino.reportAnalog(15, 1); 
 	}
 
     // Update is called once per frame
@@ -70,7 +70,7 @@ public class ArdTransHCouchTop : MonoBehaviour {
 			transform.Translate (0.0f, hcouchmovrate * Time.deltaTime, 0.0f);
 		}
 
-		if ((joyValue2 <= 477) || (joyValue2 >= 569) && (transform.localPosition.x >= leftEdge && transform.localPosition.x <= rightEdge)) {
+		if ((joyValue2 <= 477) || (joyValue2 >= 569) && (transform.localPosition.z >= leftEdge && transform.localPosition.z <= rightEdge)) {
 			hcouchmovrate2 = mappedJoy2 * hcouchmovmult;
 			transform.Translate (hcouchmovrate2 * Time.deltaTime,0.0f, 0.0f);
 		}

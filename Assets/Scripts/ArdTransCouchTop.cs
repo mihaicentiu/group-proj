@@ -67,7 +67,7 @@ public class ArdTransCouchTop : MonoBehaviour {
 		//Tell the Arduino to report any changes in the value of our joysticks2
 		arduino.reportAnalog(1, 1);  //up down
 		arduino.reportAnalog(0, 1);  //rotaion of table tilt
-		arduino.reportDigital((byte)(rotateButtonNumber / 12), 1); //unlock table tilt
+		arduino.reportDigital((byte)(rotateButtonNumber / rotateButtonNumber), 1); //unlock table tilt
 		 
 	}
 
