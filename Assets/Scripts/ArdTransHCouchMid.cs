@@ -32,6 +32,8 @@ public class ArdTransHCouchMid : MonoBehaviour {
 
 	public GameObject ButtonToHighlight;
 
+	private GameObject ArduinoScript;
+
     // Use this for initialization
     void Start()
     {
@@ -41,6 +43,8 @@ public class ArdTransHCouchMid : MonoBehaviour {
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
 		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		//grab arduino object
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
 	void ConfigurePins()
@@ -55,19 +59,21 @@ public class ArdTransHCouchMid : MonoBehaviour {
     // Update is called once per frame
     void Update ()
 	{
-		joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
+		//Check if arduino connected
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
+			
+			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
 
-		mappedJoy = joyValue.Remap (1023, 0, 1, -1); //changed imput for unity
+			mappedJoy = joyValue.Remap (1023, 0, 1, -1); //changed imput for unity
 
-		if ((joyValue <= 477) || (joyValue >= 569)) {
+			if ((joyValue <= 477) || (joyValue >= 569)) {
 
-			hcouchmidmovrate = -mappedJoy * hcouchmidmovmult;
-			transform.Translate (hcouchmidmovrate * Time.deltaTime, 0.0f, 0.0f);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+				hcouchmidmovrate = -mappedJoy * hcouchmidmovmult;
+				transform.Translate (hcouchmidmovrate * Time.deltaTime, 0.0f, 0.0f);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 		}
-		else {
-			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}
-
 	}
 }

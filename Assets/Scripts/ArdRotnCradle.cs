@@ -25,6 +25,8 @@ public class ArdRotnCradle : MonoBehaviour {
 
 	public GameObject ButtonToHighlight;
 
+	private GameObject ArduinoScript;
+
     // Use this for initialization
     void Start()
     {
@@ -34,6 +36,8 @@ public class ArdRotnCradle : MonoBehaviour {
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
 		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		//grab arduino object
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
 	void ConfigurePins()
@@ -46,20 +50,22 @@ public class ArdRotnCradle : MonoBehaviour {
 
     // Update is called once per frame
     void Update()
-    {
-		joyValue = arduino.analogRead(joyPinNumber); //joystick digital imput
-		mappedJoy = joyValue.Remap (1023, 0, -1, 1);
-		if ((joyValue <= 250) || (joyValue >= 750)) {
-			rotationZ += mappedJoy * speed;
-			rotationZ = Mathf.Clamp (rotationZ, leftRot, rightRot);
-			transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, transform.localEulerAngles.y, -rotationZ);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-		else {
-			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-		}
-		//if ((transform.rotation.z < rightRot) && (transform.rotation.z > leftRot)) {
+	{
+		//Check if arduino connected
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
+			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
+			mappedJoy = joyValue.Remap (1023, 0, -1, 1);
+			if ((joyValue <= 250) || (joyValue >= 750)) {
+				rotationZ += mappedJoy * speed;
+				rotationZ = Mathf.Clamp (rotationZ, leftRot, rightRot);
+				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, transform.localEulerAngles.y, -rotationZ);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
+			//if ((transform.rotation.z < rightRot) && (transform.rotation.z > leftRot)) {
 			//rotrate = mappedJoy * rotmult;
 			//transform.Rotate (0.0f, 0.0f, rotrate * Time.deltaTime);
 		}
+	}
     }

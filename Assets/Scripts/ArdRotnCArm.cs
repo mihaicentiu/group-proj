@@ -25,8 +25,10 @@ public class ArdRotnCArm : MonoBehaviour {
 	private Material Highlight;
 	private Material DefaultColour;
 
+
 	public GameObject ButtonToHighlight;
 
+	private GameObject ArduinoScript;
 
     // Use this for initialization
     void Start()
@@ -37,6 +39,8 @@ public class ArdRotnCArm : MonoBehaviour {
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
 		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		//grab arduino object
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
     // Update is called once per frame
@@ -50,21 +54,24 @@ public class ArdRotnCArm : MonoBehaviour {
 	}
 
     void Update()
-    {
-		joyValue = arduino.analogRead(joyPinNumber); //joystick digital imput
+	{
+		//Check if arduino connected
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
+			
+			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
 
-		mappedJoy = joyValue.Remap (1023, 0, -1, 1);
-		if ((joyValue <= 250) || (joyValue >= 750)) {
-			rotationX += mappedJoy * speed;
-			rotationX = Mathf.Clamp (rotationX, bottomRot, topRot);
-			transform.localEulerAngles = new Vector3 (rotationX, transform.localEulerAngles.y, transform.localEulerAngles.z);
-			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-		}
-			else {
+			mappedJoy = joyValue.Remap (1023, 0, -1, 1);
+			if ((joyValue <= 250) || (joyValue >= 750)) {
+				rotationX += mappedJoy * speed;
+				rotationX = Mathf.Clamp (rotationX, bottomRot, topRot);
+				transform.localEulerAngles = new Vector3 (rotationX, transform.localEulerAngles.y, transform.localEulerAngles.z);
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			} else {
 				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 			}
 
-		//rotrate = mappedJoy*rotmult;
-        //transform.Rotate(rotrate * Time.deltaTime,0.0f,0.0f);
-    }
+			//rotrate = mappedJoy*rotmult;
+			//transform.Rotate(rotrate * Time.deltaTime,0.0f,0.0f);
+		}
+	}
 }
