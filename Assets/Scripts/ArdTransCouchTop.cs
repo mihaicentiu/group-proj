@@ -39,6 +39,7 @@ public class ArdTransCouchTop : MonoBehaviour {
 	private Material DefaultColour;
 
 	public GameObject ButtonToHighlight;
+	public GameObject ButtonToggleHighlight;
 
     // Use this for initialization
     void Start()
@@ -82,12 +83,19 @@ public class ArdTransCouchTop : MonoBehaviour {
 
 		float RotX = transform.rotation.x;
 
+		//Toggle button
 		if ((toggle == false) && (arduino.digitalRead (rotateButtonNumber) == 1)) {
 				unlockTilt = !unlockTilt;
 			toggle = true;
+
+			//toggle button highlight
+			ButtonToggleHighlight.GetComponent<Renderer> ().material = Highlight;
 		}
-		
-		else if (arduino.digitalRead (rotateButtonNumber) == 0){
+		else {
+			ButtonToggleHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
+
+		if (arduino.digitalRead (rotateButtonNumber) == 0){
 			toggle = false;
 		}
 
@@ -97,14 +105,20 @@ public class ArdTransCouchTop : MonoBehaviour {
 				if ((joyValue <= 477) || (joyValue >= 569)) {
 					if (transform.localPosition.y >= 0.74f) {
 						vcouchmovrate = -0.5f;
+
 					}
 
 					if (transform.localPosition.y <= 0.37f) {
-						vcouchmovrate = +0.5f;
+						vcouchmovrate = 0.5f;
 					}
-
 					transform.Translate (0.0f, vcouchmovrate * Time.deltaTime, 0.0f);
+					//highlight button
+					ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
 				}
+				else {
+					ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+				}
+				
 			
 			}
 		}
@@ -118,10 +132,20 @@ public class ArdTransCouchTop : MonoBehaviour {
 				
 				if (joyValue2 <= 250) {
 					transform.RotateAround (transform.position, Vector3.right, mappedJoy2 * spinSpeed);
-				}
+				//highlight button
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			}
+			else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 				if (joyValue2 >= 750) {
 					transform.RotateAround (transform.position, Vector3.right, mappedJoy2 * spinSpeed);
-				}
+				//highlight button
+				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+			}
+			else {
+				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+			}
 				
 			}
 		}
