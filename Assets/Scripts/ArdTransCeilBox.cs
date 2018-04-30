@@ -46,6 +46,7 @@ public class ArdTransCeilBox : MonoBehaviour {
     void FixedUpdate()
     {
 
+		Debug.Log (arduino.digitalRead (buttonPinNumber2));
 
 		if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0))  {
 			movrate = 0;
@@ -61,20 +62,16 @@ public class ArdTransCeilBox : MonoBehaviour {
 		}
 			
 
-		if ((arduino.digitalRead (buttonPinNumber2) == 1)&& (transform.localPosition.z >= leftEdge)) {
-				movrate = -movmult;
+
+
+		if ((arduino.digitalRead (buttonPinNumber2) == 1) && (transform.localPosition.z >= leftEdge)) {
+			movrate = -movmult;
 			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
 			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
 		}
 		else {
 			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 		}
-
-
-	
-
-
-
 			
 
 		//Debug.Log (transform.localPosition.z);
