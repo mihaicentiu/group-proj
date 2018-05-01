@@ -45,23 +45,23 @@ public class UniduinoTestPanel : MonoBehaviour {
 	{
 		arduino.AnalogDataReceived += delegate(int pin, int value) 
 		{
-			Debug.Log("Analog data received: pin " + pin.ToString() + "=" + value.ToString());							
+			//Debug.Log("Analog data received: pin " + pin.ToString() + "=" + value.ToString());							
 		};
 	
 		arduino.DigitalDataReceived += delegate(int portNumber, int portData) 					
 		{
-			Debug.Log("Digital data received: port " + portNumber.ToString() + "=" + System.Convert.ToString(portData, 2));							
+			//Debug.Log("Digital data received: port " + portNumber.ToString() + "=" + System.Convert.ToString(portData, 2));							
 		};
 	
 		arduino.VersionDataReceived += delegate(int majorVersion, int minorVersion) 
 		{
-			Debug.Log("Version data received");
+			//Debug.Log("Version data received");
 			arduino.queryCapabilities();
 		};
 	
 		arduino.CapabilitiesReceived += delegate(List<Arduino.Pin> pins)
 		{
-			Debug.Log("Pin capabilities received");
+			//Debug.Log("Pin capabilities received");
 			received_pins = pins; // cache the complete pin list here so we can use it without worrying about it being complete yet
 			
 		};
@@ -106,7 +106,7 @@ public class UniduinoTestPanel : MonoBehaviour {
 						
 						if (GUILayout.Button("Disconnect"))
 						{
-							Debug.Log ("Closing connection to arduino");		
+							//Debug.Log ("Closing connection to arduino");		
 							//try {						
 								arduino.Disconnect();
 							/*} catch ( Exception e)
@@ -346,7 +346,7 @@ public class UniduinoTestPanel : MonoBehaviour {
 			
 			if (arduino != null)
 				arduino.Disconnect();
-			Debug.Log("OnDestroy called");
+			//Debug.Log("OnDestroy called");
 		}
 	
 		void Update () 

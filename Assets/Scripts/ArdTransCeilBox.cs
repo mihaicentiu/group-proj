@@ -33,7 +33,7 @@ public class ArdTransCeilBox : MonoBehaviour {
         movmult = 0.5f;
 		//For highlighting
 		Highlight = GameObject.Find ("script").GetComponent<HighlightButtons> ().Highlight;
-		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default01;
+		DefaultColour = GameObject.Find ("script").GetComponent<HighlightButtons> ().Default07;
 		//grab arduino object
 		ArduinoScript = GameObject.Find ("Uniduino");
     }
@@ -50,10 +50,10 @@ public class ArdTransCeilBox : MonoBehaviour {
     void FixedUpdate()
     {
 
-		Debug.Log (arduino.digitalRead (buttonPinNumber) + "pin 8");
-		Debug.Log (arduino.digitalRead (buttonPinNumber2) + "pin 2");
-		Debug.Log (arduino.digitalRead (buttonPinNumber2));
-		Debug.Log (arduino.digitalRead (buttonPinNumber));
+		//Debug.Log (arduino.digitalRead (buttonPinNumber) + "pin 8");
+		//Debug.Log (arduino.digitalRead (buttonPinNumber2) + "pin 2");
+		//Debug.Log (arduino.digitalRead (buttonPinNumber2));
+		//Debug.Log (arduino.digitalRead (buttonPinNumber));
 
 		//if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0))  {
 		//	movrate = 0;

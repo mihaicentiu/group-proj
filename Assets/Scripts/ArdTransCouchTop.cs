@@ -62,7 +62,7 @@ public class ArdTransCouchTop : MonoBehaviour {
 	{
 		//configure the Arduino pin to be analog for our joysticks
 		arduino.pinMode(joyPinNumber, PinMode.ANALOG);
-		arduino.pinMode(joyPinNumber, PinMode.ANALOG);
+		arduino.pinMode(joyPinNumber2, PinMode.ANALOG);
 		arduino.pinMode(rotateButtonNumber, PinMode.INPUT);
 		//Tell the Arduino to report any changes in the value of our joysticks2
 		arduino.reportAnalog(1, 1);  //up down
@@ -86,7 +86,7 @@ public class ArdTransCouchTop : MonoBehaviour {
 
 			vcouchmovrate = mappedJoy * vcouchmovmult;
 
-			Debug.Log (arduino.digitalRead (rotateButtonNumber));
+			//Debug.Log (arduino.digitalRead (rotateButtonNumber));
 
 			float RotX = transform.rotation.x;
 
