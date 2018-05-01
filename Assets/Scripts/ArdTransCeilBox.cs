@@ -50,10 +50,8 @@ public class ArdTransCeilBox : MonoBehaviour {
     void FixedUpdate()
     {
 
-<<<<<<< HEAD
 		Debug.Log (arduino.digitalRead (buttonPinNumber) + "pin 8");
 		Debug.Log (arduino.digitalRead (buttonPinNumber2) + "pin 2");
-=======
 		Debug.Log (arduino.digitalRead (buttonPinNumber2));
 		Debug.Log (arduino.digitalRead (buttonPinNumber));
 
@@ -82,7 +80,6 @@ public class ArdTransCeilBox : MonoBehaviour {
 		//	ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 		//}
 
->>>>>>> 165814ac780e01704ae743aca0da10a3b8d39cf4
 		//Check if arduino connected
 		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
 
