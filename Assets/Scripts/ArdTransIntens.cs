@@ -16,8 +16,8 @@ public class ArdTransIntens : MonoBehaviour {
 
 
 	public float mappedJoy;
-	private Material Highlight;
-	private Material DefaultColour;
+	public Material Highlight;
+	public Material DefaultColour;
 
 	public GameObject ButtonToHighlight;
 

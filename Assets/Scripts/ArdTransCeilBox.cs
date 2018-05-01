@@ -50,38 +50,67 @@ public class ArdTransCeilBox : MonoBehaviour {
     void FixedUpdate()
     {
 
+<<<<<<< HEAD
 		Debug.Log (arduino.digitalRead (buttonPinNumber) + "pin 8");
 		Debug.Log (arduino.digitalRead (buttonPinNumber2) + "pin 2");
+=======
+		Debug.Log (arduino.digitalRead (buttonPinNumber2));
+		Debug.Log (arduino.digitalRead (buttonPinNumber));
+
+		//if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0))  {
+		//	movrate = 0;
+		//}
+
+		//if ((arduino.digitalRead (buttonPinNumber) == 1) && (transform.localPosition.z <= rightEdge)) {
+		//	movrate = movmult;
+		//	transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
+		//	ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		//}
+		//else {
+		//	ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		//}
+			
+
+
+
+		//if ((arduino.digitalRead (buttonPinNumber2) == 1) && (transform.localPosition.z >= leftEdge)) {
+		//	movrate = -movmult;
+		//	transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
+		//	ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		//}
+		//else {
+		//	ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		//}
+
+>>>>>>> 165814ac780e01704ae743aca0da10a3b8d39cf4
 		//Check if arduino connected
 		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
 
-			if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0)) {
-				movrate = 0;
-			}
 
-			if ((arduino.digitalRead (buttonPinNumber) == 1) && (transform.localPosition.z <= rightEdge)) {
-				movrate = movmult;
-				transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+
+		if ((arduino.digitalRead (buttonPinNumber) == 0) && (arduino.digitalRead (buttonPinNumber2) == 0)) {
+				movrate = 0;
+		}
+
+		if ((arduino.digitalRead (buttonPinNumber) == 1) && (transform.localPosition.z <= rightEdge)) {
+			movrate = movmult;
+			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
 			} else {
 				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 			}
 			
 
-			if ((arduino.digitalRead (buttonPinNumber2) == 1) && (transform.localPosition.z >= leftEdge)) {
-				movrate = -movmult;
-				transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} else {
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}
+		if ((arduino.digitalRead (buttonPinNumber2) == 1) && (transform.localPosition.z >= leftEdge)) {
+			movrate = -movmult;
+			transform.Translate (0.0f, 0.0f, movrate * Time.deltaTime);
+			ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+		} else {
+			ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+		}
 
 		}
-	
-
-
-
-			
+				
 
 		//Debug.Log (transform.localPosition.z);
 	}
