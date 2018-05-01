@@ -3,27 +3,70 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Uniduino;
 
 public class Pause_Game : MonoBehaviour {
 	public Transform canvas;
 	public Button resumebutton;
 
-	
+	public Arduino arduino;
+
+	public int buttonPinNumber;
+
+	private GameObject ArduinoScript;
+
+	private bool unlockTilt;
+
+	private bool toggle;
+
 	// Update is called once per frame
 
+	void start () {
+		unlockTilt = false;
+		toggle = false;
+		arduino = Arduino.global;
+		arduino.Setup (ConfigurePins);
+	}
+
+	void ConfigurePins()
+	{
+		arduino.pinMode (buttonPinNumber, PinMode.INPUT);
+		arduino.reportDigital ((byte)(buttonPinNumber / buttonPinNumber), 1);
+	}
+
 	//Calling the pause
-	void Update () {
-		if (Input.GetButtonDown("Start Button"))
+	void Update ()
+	{
+		Debug.Log("PAUSE BUTTON STATUS:" + (arduino.digitalRead (buttonPinNumber)));
+
+		if (ArduinoScript.GetComponent<Arduino> ().Connected)
+		{
+
+			if (toggle == false) {
+				if (arduino.digitalRead (buttonPinNumber) == 1) {
+					unlockTilt = !unlockTilt;
+					toggle = true;
+					Debug.Log (toggle + " " + unlockTilt);
+				}
+			}
+
+			if (arduino.digitalRead (buttonPinNumber) == 0) {
+				toggle = false;
+			}
+
+		if ((Input.GetButtonDown("Start Button")) || (unlockTilt == true))
 		{
 			Pause ();
 			resumebutton.Select ();
 			resumebutton.OnSelect (null);	
 		}
 
-		if (canvas.gameObject.activeInHierarchy == true){
-			if (Input.GetButtonDown("Cancel")){
+			if (canvas.gameObject.activeInHierarchy == true) {
+				if (Input.GetButtonDown("Cancel")  ||  (unlockTilt == false)) {
 				Pause ();
 			}
+		}
+				
 		}
 	}
 

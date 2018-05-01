@@ -49,9 +49,9 @@ public class ArdRotnCeilArm : MonoBehaviour {
 	void ConfigurePins()
 	{
 		arduino.pinMode(rotateLeftPinNumber, PinMode.INPUT);
-		arduino.pinMode (rotateRightPinNumber, PinMode.INPUT);
-		arduino.reportDigital((byte)(rotateLeftPinNumber / 9), 1);
-		arduino.reportDigital((byte)(rotateRightPinNumber / 12), 1);
+		arduino.reportDigital((byte)(rotateLeftPinNumber / rotateLeftPinNumber), 1);
+//		arduino.pinMode (rotateRightPinNumber, PinMode.INPUT);
+//		arduino.reportDigital((byte)(rotateRightPinNumber / rotateRightPinNumber), 1);
 
 	}
 
@@ -59,17 +59,20 @@ public class ArdRotnCeilArm : MonoBehaviour {
     void FixedUpdate()
 	{
 
+//		Debug.Log (arduino.digitalRead (rotateRightPinNumber) + "pin 34");
+		Debug.Log (arduino.digitalRead (rotateLeftPinNumber) + "pin 30");
+
 		//Check if arduino connected
 		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
 
-			if (arduino.digitalRead (rotateRightPinNumber) == 1) {
-				rotationY += speed;
-				rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
-				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} else {
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}	
+//			if (arduino.digitalRead (rotateRightPinNumber) == 1) {
+//				rotationY += speed;
+//				rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
+//				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
+//				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+//			} else {
+//				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+//			}	
 			//rotrate = -rotmult;
 			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
 

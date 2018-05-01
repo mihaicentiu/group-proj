@@ -39,7 +39,7 @@ public class ArdTransHCouchTop : MonoBehaviour {
 		arduino.pinMode(joyPinNumber, PinMode.ANALOG);
 
 		//Tell the Arduino to report any changes in the value of our joysticks2
-		arduino.reportAnalog(4, 1);  //up down
+		arduino.reportAnalog(joyPinNumber, 1);  //up down
 	}
 
     // Update is called once per frame

@@ -41,14 +41,17 @@ public class ArdTransCeilBox : MonoBehaviour {
 	void ConfigurePins()
 	{
 		arduino.pinMode (buttonPinNumber, PinMode.INPUT);
-		arduino.reportDigital ((byte)(buttonPinNumber / 8), 1);
+		arduino.reportDigital ((byte)(buttonPinNumber / buttonPinNumber), 1);
 		arduino.pinMode (buttonPinNumber2, PinMode.INPUT);
-		arduino.reportDigital ((byte)(buttonPinNumber2 / 4), 1);
+		arduino.reportDigital ((byte)(buttonPinNumber2 / buttonPinNumber2), 1);
 	}
 
     // Update is called once per frame
     void FixedUpdate()
     {
+
+		Debug.Log (arduino.digitalRead (buttonPinNumber) + "pin 8");
+		Debug.Log (arduino.digitalRead (buttonPinNumber2) + "pin 2");
 		//Check if arduino connected
 		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
 
