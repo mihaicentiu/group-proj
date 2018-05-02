@@ -86,31 +86,29 @@ public class ArdRotnCeilArm : MonoBehaviour {
 //				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 //			}	
 
-			if (arduino.digitalRead (rotateRightPinNumber) == 1) {
-				rotationY += speed;
-				rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
-				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
+			if ((arduino.digitalRead (rotateRightPinNumber) == 1) || (arduino.digitalRead (rotateLeftPinNumber) == 1)) {
 				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} 	
-			//rotrate = -rotmult;
-			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
-
-			if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
-				rotationY += -speed;
-				rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
-				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} 
-			//rotrate = -rotmult;
-			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
-			if ((rotateLeftPinNumber) == 0 && (rotateRightPinNumber) == 0)
-			{
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+				if (arduino.digitalRead (rotateRightPinNumber) == 1) {
+					rotationY += speed;
+					rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
+					transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
+				} 	
+				if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
+					rotationY += -speed;
+					rotationY = Mathf.Clamp (rotationY, leftRotateEdge, rightRotateEdge);
+					transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, rotationY, transform.localEulerAngles.z);
+				}
 			}
+				else{
+					ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
+				}
+			//rotrate = -rotmult;
+			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f)
 
 			//if (arduino.digitalRead (rotateLeftPinNumber) == 1) {
 			//rotrate = rotmult;
 			//transform.Rotate (0.0f, rotrate * Time.deltaTime, 0.0f);
+
 		}
 	}
 }

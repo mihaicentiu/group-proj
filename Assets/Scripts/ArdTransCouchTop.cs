@@ -58,6 +58,7 @@ public class ArdTransCouchTop : MonoBehaviour {
 		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
+
 	void ConfigurePins()
 	{
 		//configure the Arduino pin to be analog for our joysticks
@@ -97,12 +98,11 @@ public class ArdTransCouchTop : MonoBehaviour {
 				Debug.Log (arduino.digitalRead (rotateButtonNumber));
 				//toggle button highlight
 				ButtonToggleHighlight.GetComponent<Renderer> ().material = Highlight;
-			} else {
-				ButtonToggleHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}
+			} 
 
 			if (arduino.digitalRead (rotateButtonNumber) == 0) {
 				toggle = false;
+				ButtonToggleHighlight.GetComponent<Renderer> ().material = DefaultColour;
 			}
 
 			if ((RotX < topEdge) || (RotX > bottomEdge)) {
@@ -135,14 +135,8 @@ public class ArdTransCouchTop : MonoBehaviour {
 
 			if (unlockTilt == true) {
 				
-				if (joyValue2 <= 250) {
-					transform.RotateAround (transform.position, Vector3.right, mappedJoy2 * spinSpeed);
-					//highlight button
-					ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-				} else {
-					ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-				}
-				if (joyValue2 >= 750) {
+
+				if ((joyValue2 >= 750) || (joyValue2 <= 250)) {
 					transform.RotateAround (transform.position, Vector3.right, mappedJoy2 * spinSpeed);
 					//highlight button
 					ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;

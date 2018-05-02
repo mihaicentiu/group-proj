@@ -60,20 +60,20 @@ public class ArdTransIntens : MonoBehaviour {
         
 			intensmovrate = mappedJoy * intensmovmult;
 	
-			if (transform.localPosition.y >= 1.17f) {
-				intensmovrate = -0.01f;
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} else {
+
+			
+			if ((joyValue >= 750) || (joyValue <= 250)) {
+						ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
+						if (transform.localPosition.y <= 0.65f) {
+							intensmovrate = +0.01f;
+						}
+						if (transform.localPosition.y >= 1.17f) {
+							intensmovrate = -0.01f;
+						}
+			}
+			else {
 				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
 			}
-
-			if (transform.localPosition.y <= 0.65f) {
-				intensmovrate = +0.01f;
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} else {
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}
-
 			transform.Translate (0.0f, intensmovrate * Time.deltaTime, 0.0f);
 		}
 	}

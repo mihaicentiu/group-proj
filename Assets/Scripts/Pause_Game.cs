@@ -1,4 +1,4 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -29,12 +29,14 @@ public class Pause_Game : MonoBehaviour {
 	private bool pausebutton;
 
 	private bool toggle;
+	private bool ptoggle;
 
 	// Update is called once per frame
 
 	void Start () {
 		pausebutton = false;
 		toggle = false;
+		ptoggle = false;
 		arduino = Arduino.global;
 		arduino.Setup (ConfigurePins);
 		ArduinoScript = GameObject.Find ("Uniduino");
@@ -64,11 +66,12 @@ public class Pause_Game : MonoBehaviour {
 		{
 			//Debug.Log ("PAUSE BUTTON STATUS:" + arduino.digitalRead (buttonPinNumber));
 
-			if ((toggle == false) && (arduino.digitalRead (buttonPinNumber) == 1))
-			{
+			if (toggle == false) {
+				if (arduino.digitalRead (buttonPinNumber) == 1){
 				pausebutton = !pausebutton;
 				toggle = true;
 				Debug.Log (toggle + " " + pausebutton);
+				}
 			}
 		}
 
@@ -79,14 +82,19 @@ public class Pause_Game : MonoBehaviour {
 
 		if ((Input.GetButtonDown("Start Button")) || (pausebutton == true))
 		{
-			Pause ();
-			resumebutton.Select ();
-			resumebutton.OnSelect (null);    
+			if (ptoggle == false) {
+				Pause ();
+				resumebutton.Select ();
+				resumebutton.OnSelect (null);  
+				ptoggle = true;
+			}
+		  
 		}
 
 		if (canvas.gameObject.activeInHierarchy == true) {
 			if (Input.GetButtonDown("Cancel")  ||  (pausebutton == false)) {
 				Pause ();
+				ptoggle = false;
 			}
 		}
 
@@ -98,14 +106,14 @@ public class Pause_Game : MonoBehaviour {
 	public void Pause()
 	{
 
-		joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
-		mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
+		//joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
+		//mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
 
-		joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
-		mappedJoy2 = joyValue2.Remap (1023, 0, -1, 1);
+//		joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
+//		mappedJoy2 = joyValue2.Remap (1023, 0, -1, 1);
 
-		Debug.Log ("MP2:" + mappedJoy2);
-		Debug.Log ("MP:"+ mappedJoy);
+		//Debug.Log ("MP2:" + mappedJoy2);
+		//Debug.Log ("MP:"+ mappedJoy);
 
 		if (canvas.gameObject.activeInHierarchy == false) {
 			canvas.gameObject.SetActive (true);

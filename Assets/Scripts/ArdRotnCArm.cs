@@ -30,6 +30,7 @@ public class ArdRotnCArm : MonoBehaviour {
 
 	private GameObject ArduinoScript;
 
+
     // Use this for initialization
     void Start()
     {
@@ -65,13 +66,17 @@ public class ArdRotnCArm : MonoBehaviour {
 				rotationX += mappedJoy * speed;
 				rotationX = Mathf.Clamp (rotationX, bottomRot, topRot);
 				transform.localEulerAngles = new Vector3 (rotationX, transform.localEulerAngles.y, transform.localEulerAngles.z);
-				ButtonToHighlight.GetComponent<Renderer> ().material = Highlight;
-			} else {
-				ButtonToHighlight.GetComponent<Renderer> ().material = DefaultColour;
-			}
+
+			} 
+
+		
 
 			//rotrate = mappedJoy*rotmult;
 			//transform.Rotate(rotrate * Time.deltaTime,0.0f,0.0f);
 		}
 	}
+
+
+	
+	
 }
