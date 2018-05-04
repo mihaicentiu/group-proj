@@ -55,7 +55,7 @@ public class ArdRotnCradle : MonoBehaviour {
     void Update()
 	{
 		//Check if arduino connected
-		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
+		if ((ArduinoScript.GetComponent<Arduino> ().Connected) && (Time.timeScale == 1)) {
 			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
 			mappedJoy = joyValue.Remap (1023, 0, -1, 1);
 			if ((joyValue <= 250) || (joyValue >= 750)) {

@@ -41,9 +41,9 @@ public class ArdTransCeilBox : MonoBehaviour {
 	void ConfigurePins()
 	{
 		arduino.pinMode (buttonPinNumber, PinMode.INPUT);
-		arduino.reportDigital ((byte)(buttonPinNumber / buttonPinNumber), 1);
+		arduino.reportDigital ((byte)(buttonPinNumber / 8), 1);
 		arduino.pinMode (buttonPinNumber2, PinMode.INPUT);
-		arduino.reportDigital ((byte)(buttonPinNumber2 / buttonPinNumber2), 1);
+		arduino.reportDigital ((byte)(buttonPinNumber2 / 8), 1);
 
 
 	}

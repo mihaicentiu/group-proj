@@ -2,27 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using Uniduino;
 
 public class Pause_Game : MonoBehaviour {
 	public Transform canvas;
 	public Button resumebutton;
+	public Button restartbutton;
+	public Button menubutton;
+
+
+
 
 	public Arduino arduino;
 	//we need to declare an integer for the pin number of our potentiometer,
 	//making these variables public means we can change them in the editor later
 	//if we change the layout of our arduino
 	public int joyPinNumber;
-	public int joyPinNumber2;
+
 	public int buttonPinNumber;
 	//a float variable to hold the potentiometer value (0 - 1023)
 	public float joyValue;
-	public float joyValue2;
 	//we will later remap that potValue to the y position of our capsule and hold it in this variable
 	public float mappedJoy;
-	public float mappedJoy2;
-
 
 	private GameObject ArduinoScript;
 
@@ -31,30 +34,32 @@ public class Pause_Game : MonoBehaviour {
 	private bool toggle;
 	private bool ptoggle;
 
+	private int MenuCount; // Counter for pause menu
+
+
 	// Update is called once per frame
 
 	void Start () {
 		pausebutton = false;
 		toggle = false;
 		ptoggle = false;
+
+		MenuCount = 2;
+
 		arduino = Arduino.global;
 		arduino.Setup (ConfigurePins);
 		ArduinoScript = GameObject.Find ("Uniduino");
+
+
 	}
 
 	void ConfigurePins()
 	{
 		arduino.pinMode (buttonPinNumber, PinMode.INPUT);
-		arduino.reportDigital ((byte)(buttonPinNumber / buttonPinNumber), 1);
+		arduino.reportDigital ((byte)(buttonPinNumber / 8), 1);
 
 		arduino.pinMode(joyPinNumber, PinMode.ANALOG);
-		arduino.pinMode(joyPinNumber2, PinMode.ANALOG);
-
-		arduino.reportAnalog(1, 1);  //up down
-
-		arduino.reportAnalog(0, 1);  //rotaion of table tilt
-
-
+		arduino.reportAnalog(1, 1);  //up down 
 	}
 
 	//Calling the pause
@@ -62,15 +67,14 @@ public class Pause_Game : MonoBehaviour {
 	{
 
 
-		if (ArduinoScript.GetComponent<Arduino> ().Connected)
-		{
+		if (ArduinoScript.GetComponent<Arduino> ().Connected)	{
 			//Debug.Log ("PAUSE BUTTON STATUS:" + arduino.digitalRead (buttonPinNumber));
 
 			if (toggle == false) {
 				if (arduino.digitalRead (buttonPinNumber) == 1){
 				pausebutton = !pausebutton;
 				toggle = true;
-				Debug.Log (toggle + " " + pausebutton);
+				//Debug.Log (toggle + " " + pausebutton);
 				}
 			}
 		}
@@ -91,6 +95,10 @@ public class Pause_Game : MonoBehaviour {
 		  
 		}
 
+		if ((ArduinoScript.GetComponent<Arduino> ().Connected) && (ptoggle == true)) {
+			MenuControl ();
+		}
+
 		if (canvas.gameObject.activeInHierarchy == true) {
 			if (Input.GetButtonDown("Cancel")  ||  (pausebutton == false)) {
 				Pause ();
@@ -106,15 +114,6 @@ public class Pause_Game : MonoBehaviour {
 	public void Pause()
 	{
 
-		//joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
-		//mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
-
-//		joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
-//		mappedJoy2 = joyValue2.Remap (1023, 0, -1, 1);
-
-		//Debug.Log ("MP2:" + mappedJoy2);
-		//Debug.Log ("MP:"+ mappedJoy);
-
 		if (canvas.gameObject.activeInHierarchy == false) {
 			canvas.gameObject.SetActive (true);
 			Time.timeScale = 0;
@@ -126,6 +125,31 @@ public class Pause_Game : MonoBehaviour {
 			Time.timeScale = 1;
 		}
 	}
+
+	void MenuControl(){
+
+		joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
+		mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
+
+
+		Debug.Log ("MP:"+ mappedJoy);
+
+
+		if (MenuCount == 1) {
+			EventSystem.current.SetSelectedGameObject (resumebutton.gameObject); 
+		}
+
+		if (MenuCount == 2) {
+			EventSystem.current.SetSelectedGameObject (restartbutton.gameObject); 
+
+		}
+		if (MenuCount == 3) {
+			EventSystem.current.SetSelectedGameObject (menubutton.gameObject); 
+
+		}
+	}
+
+
 
 
 
