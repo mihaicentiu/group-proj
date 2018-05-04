@@ -35,6 +35,8 @@ public class ArdTransHCouchTop : MonoBehaviour {
     private float hcouchmovmult;
 	private float hcouchmovrate2;
 
+	private GameObject ArduinoScript;
+
 
     // Use this for initialization
     void Start()
@@ -42,6 +44,7 @@ public class ArdTransHCouchTop : MonoBehaviour {
         hcouchmovmult = 0.1f;
 		arduino = Arduino.global;
 		arduino.Setup(ConfigurePins);
+		ArduinoScript = GameObject.Find ("Uniduino");
     }
 
 	void ConfigurePins()
@@ -59,21 +62,24 @@ public class ArdTransHCouchTop : MonoBehaviour {
     // Update is called once per frame
     void Update ()
 	{
-		joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
-		joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
+		if (ArduinoScript.GetComponent<Arduino> ().Connected) {
+			
+			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
+			joyValue2 = arduino.analogRead (joyPinNumber2); //joystick digital imput
 
-		mappedJoy = joyValue.Remap (1023, 0, 1, -1); //changed imput for unity
-		mappedJoy2 = joyValue2.Remap (1023, 0, 1, -1); //changed imput for unity
+			mappedJoy = joyValue.Remap (1023, 0, 1, -1); //changed imput for unity
+			mappedJoy2 = joyValue2.Remap (1023, 0, 1, -1); //changed imput for unity
 
 
-		if ((joyValue <= 477) || (joyValue >= 569) && (transform.localPosition.x >= bottomEdge && transform.localPosition.x <= topEdge)) {
-			hcouchmovrate = mappedJoy * hcouchmovmult;
-			transform.Translate (0.0f, hcouchmovrate * Time.deltaTime, 0.0f);
-		}
+			if ((joyValue <= 477) || (joyValue >= 569) && (transform.localPosition.z >= bottomEdge && transform.localPosition.z <= topEdge)) {
+				hcouchmovrate = mappedJoy * hcouchmovmult;
+				transform.Translate (0.0f, hcouchmovrate * Time.deltaTime, 0.0f);
+			}
 
-		if ((joyValue2 <= 477) || (joyValue2 >= 569) && (transform.localPosition.z >= leftEdge && transform.localPosition.z <= rightEdge)) {
-			hcouchmovrate2 = mappedJoy2 * hcouchmovmult;
-			transform.Translate (hcouchmovrate2 * Time.deltaTime,0.0f, 0.0f);
+			if ((joyValue2 <= 477) || (joyValue2 >= 569) && (transform.localPosition.x >= leftEdge && transform.localPosition.x <= rightEdge)) {
+				hcouchmovrate2 = mappedJoy2 * hcouchmovmult;
+				transform.Translate (hcouchmovrate2 * Time.deltaTime, 0.0f, 0.0f);
+			}
 		}
 	}
 }

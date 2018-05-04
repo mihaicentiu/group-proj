@@ -35,6 +35,7 @@ public class Pause_Game : MonoBehaviour {
 	private bool ptoggle;
 
 	private int MenuCount; // Counter for pause menu
+	private bool valueChange;
 
 
 	// Update is called once per frame
@@ -45,6 +46,7 @@ public class Pause_Game : MonoBehaviour {
 		ptoggle = false;
 
 		MenuCount = 2;
+		valueChange = false;
 
 		arduino = Arduino.global;
 		arduino.Setup (ConfigurePins);
@@ -132,7 +134,33 @@ public class Pause_Game : MonoBehaviour {
 		mappedJoy = joyValue.Remap (1023, 0, -1, 1); //changed imput for unity
 
 
-		Debug.Log ("MP:"+ mappedJoy);
+
+
+
+		if (mappedJoy == -1) {
+			if (valueChange == false) {
+				MenuCount++;
+				valueChange = true;
+				if (MenuCount > 3) {
+					MenuCount = 3;
+				}
+			}
+		}
+
+		if (mappedJoy == 1) {
+			if (valueChange == false) {
+				MenuCount--;
+				valueChange = true;
+				if (MenuCount < 1) {
+					MenuCount = 1;
+				}
+			}
+		}
+
+		if ((mappedJoy < 0.2) && ((mappedJoy > -0.2))){
+			valueChange = false;
+
+		}
 
 
 		if (MenuCount == 1) {

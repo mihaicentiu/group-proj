@@ -59,7 +59,7 @@ public class ArdRotnCradle : MonoBehaviour {
 			joyValue = arduino.analogRead (joyPinNumber); //joystick digital imput
 			mappedJoy = joyValue.Remap (1023, 0, -1, 1);
 			if ((joyValue <= 250) || (joyValue >= 750)) {
-				rotationZ += mappedJoy * speed;
+				rotationZ += mappedJoy * speed;   //is a little glitchy
 				rotationZ = Mathf.Clamp (rotationZ, leftRot, rightRot);
 				transform.localEulerAngles = new Vector3 (transform.localEulerAngles.x, transform.localEulerAngles.y, -rotationZ);
 
