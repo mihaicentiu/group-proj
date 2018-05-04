@@ -85,7 +85,7 @@ public class HighlightButtons : MonoBehaviour {
 
 				if (((joyValueVertical <= 250) || (joyValueVertical >= 750)) || ((joyValueHorizontal <= 250) || (joyValueHorizontal>= 750))) {
 					CArmRotAndCradleRotButton.GetComponent<Renderer> ().material = Highlight;
-					Debug.Log ("HIGHLIGHT!!!!");
+					//Debug.Log ("HIGHLIGHT!!!!");
 
 				}
 
@@ -93,7 +93,7 @@ public class HighlightButtons : MonoBehaviour {
 				else{
 					CArmRotAndCradleRotButton.GetComponent<Renderer> ().material = Default01;
 
-					Debug.Log ("STOP HIGHLIGHT!!!!");
+					//Debug.Log ("STOP HIGHLIGHT!!!!");
 				}
 
 

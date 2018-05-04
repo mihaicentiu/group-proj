@@ -49,13 +49,13 @@ public class ArdRotnCeilArm : MonoBehaviour {
 	void ConfigurePins()
 	{
 		arduino.pinMode(rotateLeftPinNumber, PinMode.INPUT);
-		arduino.reportDigital((byte)(rotateLeftPinNumber / rotateLeftPinNumber), 1);
+		arduino.reportDigital((byte)(rotateLeftPinNumber / 8), 1);
 //		arduino.pinMode (rotateRightPinNumber, PinMode.INPUT);
 //		arduino.reportDigital((byte)(rotateRightPinNumber / rotateRightPinNumber), 1);
 
 		arduino.pinMode (rotateRightPinNumber, PinMode.INPUT);
 		//arduino.reportDigital((byte)(rotateLeftPinNumber / rotateLeftPinNumber), 1);
-		arduino.reportDigital((byte)(rotateRightPinNumber / rotateRightPinNumber), 1);
+		arduino.reportDigital((byte)(rotateRightPinNumber /8), 1);
 
 	}
 
